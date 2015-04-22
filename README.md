@@ -9,7 +9,7 @@ Sprinkler is a simple JavaScript library used to inject (or sprinkle) JSON data 
 <li>Easy - The entire library can be learned in about a half hour.  </li>
 <li>Free - MIT license</li>
 <li>Light Weight</li>
-<li>Zero decencies </li>
+<li>Zero dependencies</li>
 </ul>
 
 ##Problem:
@@ -40,6 +40,26 @@ Sprinkler({AAPL: {"Name":"Apple Inc","LastPrice":126.45}});
 ```
 ##### html:
 <p>The value of Apple Inc is 126.45.</P>
+
+### {{#if node}} {{#ifnot node}}
+##### js:
+```javascript
+Sprinkler({"Name":"Bust coin","LastPrice": 0}});
+```
+##### html:
+```html
+<p>
+{{Name}} 
+{{#if LastPrice}}
+<span>is worth {{LastPrice}}</span> <!-- this node will not show if LastPrice is truthy -->
+{{#ifnot LastPrice}}
+<span>is worthless</span> <!-- this node will not show if LastPrice is falsy -->
+</p>
+```
+##### output:
+<p> Bust coin is worthless </p>
+Inside the double curly-brace, you can precede the name with the #if or #ifnot command.  If the #if value is evaluated to <a href="http://www.sitepoint.com/javascript-truthy-falsy/" target="window">truthy</a>, the next HTML node will be removed.   If #ifnot name value is evaluated to <a href="http://www.sitepoint.com/javascript-truthy-falsy/" target="window">falsy</a>, the next HTML node will be removed.  
+
 ### {{#foreach node}}
 ##### js:
 ```javascript
@@ -49,7 +69,7 @@ Sprinkler({stocks: [{"Name":"Apple Inc","LastPrice":126.45}, {"Name":"General El
 ```html
 <ul>
 {{#foreach stocks}}
-<li>{{Name}}- {{LastPrice}}</li>//this node will be duplicated 
+<li>{{Name}}- {{LastPrice}}</li><!-- this node will be duplicated --> 
 </ul>
 ```
 ##### output:
